@@ -14,7 +14,6 @@ class Solution:
             fast = fast.next.next
 
 
-
 def list_to_linked_list(array_list):
     head_node = ListNode(array_list[0])
     node = head_node
@@ -34,4 +33,3 @@ if __name__ == '__main__':
     nums = [3, 2, 0, -4]
     head = list_to_linked_list(nums)
     traverse_linked_list(head)
-
