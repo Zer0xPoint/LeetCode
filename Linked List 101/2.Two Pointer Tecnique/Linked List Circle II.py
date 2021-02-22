@@ -9,19 +9,22 @@ class Solution:
     # @param head, a ListNode
     # @return a list node
     def detectCycle(self, head):
-        if head is None: return None
-        hare, turtle = head, head
-        while hare is not None:
-            turtle = turtle.next
-            hare = hare.next
-            if hare is None: return None
-            hare = hare.next
-            if hare == turtle:
-                turtle = head
-                while turtle != hare:
-                    hare = hare.next
-                    turtle = turtle.next
-                return hare
+        if head is None:
+            return None
+        hare_node, turtle_node = head, head
+        while hare_node and hare_node.next:
+            turtle_node = turtle_node.next
+            # hare_node = hare_node.next
+            # if hare_node is None:
+            #     return None
+            # hare_node = hare_node.next
+            hare_node = hare_node.next.next
+            if hare_node is turtle_node:
+                turtle_node = head
+                while turtle_node != hare_node:
+                    hare_node = hare_node.next
+                    turtle_node = turtle_node.next
+                return hare_node
         return None
 
 
@@ -40,7 +43,22 @@ def traverse_linked_list(linked_list_head: ListNode):
         linked_list_head = linked_list_head.next
 
 
+def create_circle_in_linked_list(linked_list_head: ListNode, index: int):
+    # traverse to tail
+    tail_node = linked_list_head
+    while tail_node.next:
+        tail_node = tail_node.next
+    # create circle at index
+    head_node = linked_list_head
+    for i in range(index):
+        head_node = head_node.next
+    tail_node.next = head_node
+
+
 if __name__ == '__main__':
     nums = [3, 2, 0, -4]
     head = list_to_linked_list(nums)
-    traverse_linked_list(head)
+    create_circle_in_linked_list(head, 0)
+    # traverse_linked_list(head)
+    s = Solution()
+    print(s.detectCycle(head))
