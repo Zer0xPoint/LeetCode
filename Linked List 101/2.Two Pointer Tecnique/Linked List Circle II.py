@@ -6,12 +6,23 @@ class ListNode:
 
 
 class Solution:
-    def detectCycle(self, head: ListNode) -> ListNode:
-        slow = head
-        fast = head
-        while slow != fast:
-            slow = slow.next
-            fast = fast.next.next
+    # @param head, a ListNode
+    # @return a list node
+    def detectCycle(self, head):
+        if head is None: return None
+        hare, turtle = head, head
+        while hare is not None:
+            turtle = turtle.next
+            hare = hare.next
+            if hare is None: return None
+            hare = hare.next
+            if hare == turtle:
+                turtle = head
+                while turtle != hare:
+                    hare = hare.next
+                    turtle = turtle.next
+                return hare
+        return None
 
 
 def list_to_linked_list(array_list):
