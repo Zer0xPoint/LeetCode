@@ -28,7 +28,12 @@ class Solution:
         return None
 
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        node_a, node_b = headA, headB
+        while node_a != node_b:
+            node_a = node_a.next if node_a is not None else node_b
+            node_b = node_b.next if node_b is not None else node_a
 
+        return node_a
 
 
 def list_to_linked_list(array_list):
@@ -63,5 +68,12 @@ if __name__ == '__main__':
     head = list_to_linked_list(nums)
     create_circle_in_linked_list(head, 0)
     # traverse_linked_list(head)
+    list_a = [4, 1, 8, 4, 5]
+    list_b = [2, 5, 6, 1, 8, 4, 5]
+    list_a = [1, 8, 4, 5]
+    list_b = [1, 8, 4, 5]
     s = Solution()
-    print(s.detectCycle(head))
+    # print(s.detectCycle(head))
+    head_a = list_to_linked_list(list_a)
+    head_b = list_to_linked_list(list_b)
+    print(s.getIntersectionNode(head_a, head_b))
