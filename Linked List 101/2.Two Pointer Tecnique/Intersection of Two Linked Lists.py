@@ -8,32 +8,20 @@ class ListNode:
 class Solution:
     # @param head, a ListNode
     # @return a list node
-    def detectCycle(self, head):
-        if head is None:
-            return None
-        hare_node, turtle_node = head, head
-        while hare_node and hare_node.next:
-            turtle_node = turtle_node.next
-            # hare_node = hare_node.next
-            # if hare_node is None:
-            #     return None
-            # hare_node = hare_node.next
-            hare_node = hare_node.next.next
-            if hare_node is turtle_node:
-                turtle_node = head
-                while turtle_node != hare_node:
-                    hare_node = hare_node.next
-                    turtle_node = turtle_node.next
-                return hare_node
-        return None
 
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
         node_a, node_b = headA, headB
         while node_a != node_b:
             node_a = node_a.next if node_a is not None else node_b
             node_b = node_b.next if node_b is not None else node_a
-
-        return node_a
+            # if node_a is None:
+            #     node_a = node_b
+            # else:
+            #     node_a = node_a.next
+            if node_a is not None and node_b is not None:
+                if node_a.val is node_b.val:
+                    break
+        return node_a.val
 
 
 def list_to_linked_list(array_list):
@@ -71,9 +59,8 @@ if __name__ == '__main__':
     list_a = [4, 1, 8, 4, 5]
     list_b = [2, 5, 6, 1, 8, 4, 5]
     list_a = [1, 8, 4, 5]
-    list_b = [1, 8, 4, 5]
+    list_b = [2, 3, 8, 4, 5]
     s = Solution()
-    # print(s.detectCycle(head))
     head_a = list_to_linked_list(list_a)
     head_b = list_to_linked_list(list_b)
     print(s.getIntersectionNode(head_a, head_b))
