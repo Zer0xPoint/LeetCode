@@ -5,23 +5,35 @@ class ListNode:
         self.next = None
 
 
-class Solution:
-    # @param head, a ListNode
-    # @return a list node
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
 
-    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
-        node_a, node_b = headA, headB
-        while node_a != node_b:
-            node_a = node_a.next if node_a is not None else node_b
-            node_b = node_b.next if node_b is not None else node_a
-            # if node_a is None:
-            #     node_a = node_b
-            # else:
-            #     node_a = node_a.next
-            if node_a is not None and node_b is not None:
-                if node_a.val is node_b.val:
-                    break
-        return node_a.val
+class Solution(object):
+    def getIntersectionNode(self, A, B):
+        if not A or not B: return None
+
+        # Concatenate A and B
+        last = A
+        while last.next: last = last.next
+        last.next = B
+
+        # Find the start of the loop
+        fast = slow = A
+        while fast and fast.next:
+            slow, fast = slow.next, fast.next.next
+            if slow == fast:
+                fast = A
+                while fast != slow:
+                    slow, fast = slow.next, fast.next
+                last.next = None
+                return slow
+
+        # No loop found
+        last.next = None
+        return None
 
 
 def list_to_linked_list(array_list):
