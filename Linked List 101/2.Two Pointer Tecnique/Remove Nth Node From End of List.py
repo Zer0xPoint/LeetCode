@@ -12,30 +12,11 @@ class ListNode:
 #         self.next = None
 
 class Solution(object):
-    def getIntersectionNode(self, A, B):
-        if not A or not B:
-            return None
-
-        # Concatenate A and B
-        last = A
-        while last.next:
-            last = last.next
-        last.next = B
-
-        # Find the start of the loop
-        fast = slow = A
-        while fast and fast.next:
-            slow, fast = slow.next, fast.next.next
-            if slow == fast:
-                fast = A
-                while fast != slow:
-                    slow, fast = slow.next, fast.next
-                last.next = None
-                return slow
-
-        # No loop found
-        last.next = None
-        return None
+    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        while n > 0:
+            n -= 1
+            if n == 0:
+                tmp_node =
 
 
 def list_to_linked_list(array_list):
@@ -66,15 +47,8 @@ def create_circle_in_linked_list(linked_list_head: ListNode, index: int):
 
 
 if __name__ == '__main__':
-    nums = [3, 2, 0, -4]
+    nums = [1, 2, 3, 4, 5]
     head = list_to_linked_list(nums)
-    create_circle_in_linked_list(head, 0)
-    # traverse_linked_list(head)
-    list_a = [4, 1, 8, 4, 5]
-    list_b = [2, 5, 6, 1, 8, 4, 5]
-    list_a = [1, 8, 4, 5]
-    list_b = [2, 3, 8, 4, 5]
+    n = 2
     s = Solution()
-    head_a = list_to_linked_list(list_a)
-    head_b = list_to_linked_list(list_b)
-    print(s.getIntersectionNode(head_a, head_b))
+    print(s.removeNthFromEnd(head, n))
