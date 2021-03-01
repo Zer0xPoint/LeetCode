@@ -13,10 +13,21 @@ class ListNode:
 
 class Solution(object):
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        while n > 0:
-            n -= 1
-            if n == 0:
-                tmp_node =
+        linked_list_len = 0
+        count_head = head
+        while count_head:
+            linked_list_len += 1
+            count_head = count_head.next
+        count = linked_list_len - n
+        while count:
+            count -= 1
+            if count == 0:
+                head.next = head.next.next
+            else:
+                head = head.next
+            print(count)
+        print(linked_list_len)
+        return head
 
 
 def list_to_linked_list(array_list):
