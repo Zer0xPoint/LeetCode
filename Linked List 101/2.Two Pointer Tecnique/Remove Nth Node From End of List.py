@@ -5,30 +5,36 @@ class ListNode:
         self.next = None
 
 
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
 class Solution(object):
-    def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        linked_list_len = 0
-        count_head = head
-        dummy = ListNode
-        dummy.next = head
-        while count_head:
-            linked_list_len += 1
-            count_head = count_head.next
-        count = linked_list_len - n
-        while count > 1:
-            count -= 1
-            # if count == 0:
-            #     head.next = head.next.next
-            # else:
-            head = head.next
-        head.next = head.next.next
-        return dummy.next
+    def removeNthFromEnd(self, head_node: ListNode, n: int) -> ListNode:
+        # O(2n) Two Pass Solution
+        # linked_list_len = 0
+        # dummy_node = ListNode
+        # dummy_node.next = head_node
+        # while head_node:
+        #     linked_list_len += 1
+        #     head_node = head_node.next
+        # count = linked_list_len - n
+        # head_node = dummy_node
+        # while count:
+        #     count -= 1
+        #     head_node = head_node.next
+        # head_node.next = head_node.next.next
+        # return dummy_node.next
+
+        # One Pass Solution
+        dummy_node = ListNode
+        dummy_node.next = head_node
+        first_node = dummy_node
+        second_node = dummy_node
+
+        for _ in range(n):
+            first_node = first_node.next
+        while first_node.next:
+            first_node = first_node.next
+            second_node = second_node.next
+        second_node.next = second_node.next.next
+        return dummy_node.next
 
 
 def list_to_linked_list(array_list):
@@ -60,7 +66,9 @@ def create_circle_in_linked_list(linked_list_head: ListNode, index: int):
 
 if __name__ == '__main__':
     nums = [1, 2, 3, 4, 5]
+    # nums = [1]
     head = list_to_linked_list(nums)
     n = 2
+    # n = 1
     s = Solution()
     print(traverse_linked_list(s.removeNthFromEnd(head, n)))
