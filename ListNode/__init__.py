@@ -14,9 +14,11 @@ def list_to_linked_list(array_list):
 
 
 def traverse_linked_list(linked_list_head: ListNode):
-    while linked_list_head:
-        print(linked_list_head.val)
-        linked_list_head = linked_list_head.next
+    head_node = linked_list_head
+    while head_node:
+        print(head_node.val)
+        head_node = head_node.next
+
 
 def create_circle_in_linked_list(linked_list_head: ListNode, index: int):
     # traverse to tail
