@@ -8,6 +8,10 @@ from ListNode import *
 
 class Solution:
     def oddEvenList(self, head: ListNode) -> ListNode:
+        dummy_head_node = ListNode
+        dummy_head_node.next = head
+        first_node = dummy_head_node
+        second_node = first_node.next
 
 
 if __name__ == '__main__':
