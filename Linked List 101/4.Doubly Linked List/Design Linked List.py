@@ -107,10 +107,10 @@ class MyLinkedList(object):
             self.head = curr.next
             curr.prev = None
         else:
-            for i in range(index):
+            for __ in range(index):
                 curr = curr.next
-            if curr is None:
-                print('1')
+            # if curr is None:
+            #     print('1')
             prev_node = curr.prev
             next_node = curr.next
             if prev_node:
