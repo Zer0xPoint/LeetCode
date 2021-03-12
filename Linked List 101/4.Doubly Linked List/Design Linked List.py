@@ -11,162 +11,90 @@ class MyLinkedList(object):
         """
         Initialize your data structure here.
         """
-        self.head = None
+        self.dummy_head = Node(0)
+        self.dummy_tail = Node(0)
+        self.dummy_tail.prev = self.dummy_head
+        self.dummy_head.next = self.dummy_tail
         self.size = 0
 
     def get(self, index):
-        """
-        Get the value of the index-th node in the linked list. If the index is invalid, return -1.
-        :type index: int
-        :rtype: int
-        """
         if index < 0 or index >= self.size:
             return -1
-
-        if self.head is None:
-            return -1
-
-        curr = self.head
-        for i in range(index):
-            curr = curr.next
-        return curr.val
+        curr_node = self.dummy_head.next
+        for __ in range(index):
+            curr_node = curr_node.next
+        return curr_node.val
 
     def addAtHead(self, val):
-        """
-        Add a node of value val before the first element of the linked list.
-        After the insertion, the new node will be the first node of the linked list.
-        :type val: int
-        :rtype: void
-        """
         node = Node(val)
-        node.next = self.head
-        node.prev = None
-        self.head = node
-
-        next_node = self.head.next
-        if next_node:
-            next_node.prev = node
+        node.next = self.dummy_head.next
+        node.prev = self.dummy_head
+        self.dummy_head.next.prev = node
+        self.dummy_head.next = node
 
         self.size += 1
 
     def addAtTail(self, val):
-        """
-        Append a node of value val to the last element of the linked list.
-        :type val: int
-        :rtype: void
-        """
         node = Node(val)
-        curr = self.head
-        if curr is None:
-            self.head = node
-        else:
-            while curr.next is not None:
-                curr = curr.next
-            curr.next = node
-            node.next = None
-            node.prev = curr
+        node.prev = self.dummy_tail.prev
+        node.next = self.dummy_tail
+        self.dummy_tail.prev.next = node
+        self.dummy_tail.prev = node
 
         self.size += 1
 
     def addAtIndex(self, index, val):
-        """
-        Add a node of value val before the index-th node in the linked list.
-        If index equals to the length of linked list, the node will be appended to the end of linked list.
-        If index is greater than the length, the node will not be inserted.
-        :type index: int
-        :type val: int
-        :rtype: void
-        """
         if index < 0 or index > self.size:
             return
-
         if index == 0:
             self.addAtHead(val)
+        elif index == self.size:
+            self.addAtTail(val)
         else:
-            curr = self.head
-            for i in range(index - 1):
-                curr = curr.next
+            curr_node = self.dummy_head.next
+            for __ in range(index - 1):
+                curr_node = curr_node.next
             node = Node(val)
-            node.next = curr.next
-            curr.next = node
-            node.prev = curr
+            node.next = curr_node.next
+            node.prev = curr_node
+            curr_node.next.prev = node
+            curr_node.next = node
 
             self.size += 1
 
     def deleteAtIndex(self, index):
-        """
-        Delete the index-th node in the linked list, if the index is valid.
-        :type index: int
-        :rtype: void
-        """
         if index < 0 or index >= self.size:
             return
 
-        curr = self.head
-        if index == 0:
-            self.head = curr.next
-            curr.prev = None
-        else:
-            for __ in range(index):
-                curr = curr.next
-            # if curr is None:
-            #     print('1')
-            prev_node = curr.prev
-            next_node = curr.next
-            if prev_node:
-                prev_node.next = next_node
-            if next_node:
-                next_node.prev = prev_node
+        curr_node = self.dummy_head
+        for __ in range(index):
+            curr_node = curr_node.next
+        curr_node.next.next.prev = curr_node
+        curr_node.next = curr_node.next.next
 
         self.size -= 1
 
-    def traverse_linked_list(self, linked_list_head):
-        # head_node = linked_list_head
-        node = self.head
-        while node:
-            print(node.val)
+    def traverse_linked_list(self):
+        node = self.dummy_head.next
+        linked_list = []
+        for __ in range(self.size):
+            linked_list.append(node.val)
             node = node.next
+        print(linked_list)
+
+    def traverse_linked_list_backwards(self):
+        node = self.dummy_tail.prev
+        backwards_linked_list = []
+        for __ in range(self.size):
+            backwards_linked_list.append(node.val)
+            node = node.prev
+        print(backwards_linked_list)
 
 
 if __name__ == "__main__":
     myLinkedList = MyLinkedList()
-    # ["MyLinkedList", "addAtHead", "addAtHead", "addAtHead", "addAtIndex", "deleteAtIndex", "addAtHead", "addAtTail",
-    #  "get", "addAtHead", "addAtIndex", "addAtHead"]
-    # [[], [7], [2], [1], [3, 0], [2], [6], [4], [4], [4], [5, 0], [6]]
-    operations = ["MyLinkedList", "addAtHead", "addAtTail", "addAtTail", "addAtTail", "addAtTail", "addAtTail",
-                  "addAtTail",
-                  "deleteAtIndex", "addAtHead", "addAtHead", "get", "addAtTail", "addAtHead", "get", "addAtTail",
-                  "addAtIndex",
-                  "addAtTail", "addAtHead", "addAtHead", "addAtHead", "get", "addAtIndex", "addAtHead", "get",
-                  "addAtHead",
-                  "deleteAtIndex", "addAtHead", "addAtTail", "addAtTail", "addAtIndex", "addAtTail", "addAtHead", "get",
-                  "addAtTail",
-                  "deleteAtIndex", "addAtIndex", "deleteAtIndex", "addAtHead", "addAtTail", "addAtHead", "addAtHead",
-                  "addAtTail",
-                  "addAtTail", "get", "get", "addAtHead", "addAtTail", "addAtTail", "addAtTail", "addAtIndex", "get",
-                  "addAtHead",
-                  "addAtIndex", "addAtHead", "addAtTail", "addAtTail", "addAtIndex", "deleteAtIndex", "addAtIndex",
-                  "addAtHead",
-                  "addAtHead", "deleteAtIndex", "addAtTail", "deleteAtIndex", "addAtIndex", "addAtTail", "addAtHead",
-                  "get",
-                  "addAtIndex", "addAtTail", "addAtHead", "addAtHead", "addAtHead", "addAtHead", "addAtHead",
-                  "addAtHead",
-                  "deleteAtIndex", "get", "get", "addAtHead", "get", "addAtTail", "addAtTail", "addAtIndex",
-                  "addAtIndex",
-                  "addAtHead", "addAtTail", "addAtTail", "get", "addAtIndex", "addAtHead", "deleteAtIndex", "addAtTail",
-                  "get",
-                  "addAtHead", "get", "addAtHead", "deleteAtIndex", "get", "addAtTail", "addAtTail"]
-    vals = [[], [38], [66], [61], [76], [26], [37], [8], [5], [4], [45], [4], [85], [37], [5], [93], [10, 23], [21],
-            [52],
-            [15], [47], [12], [6, 24], [64], [4], [31], [6], [40], [17], [15], [19, 2], [11], [86], [17], [55], [15],
-            [14, 95],
-            [22], [66], [95], [8], [47], [23], [39], [30], [27], [0], [99], [45], [4], [9, 11], [6], [81], [18, 32],
-            [20],
-            [13], [42], [37, 91], [36], [10, 37], [96], [57], [20], [89], [18], [41, 5], [23], [75], [7], [25, 51],
-            [48], [46],
-            [29], [85], [82], [6], [38], [14], [1], [12], [42], [42], [83], [13], [14, 20], [17, 34], [36], [58], [2],
-            [38],
-            [33, 59], [37], [15], [64], [56], [0], [40], [92], [63], [35], [62], [32]]
+    operations = ["MyLinkedList", "addAtHead", "addAtTail", "addAtIndex", "get", "deleteAtIndex", "get"]
+    vals = [[], [1], [3], [1, 2], [4], [1], [1]]
     for i in range(1, len(operations)):
         if operations[i] == "addAtHead":
             myLinkedList.addAtHead(vals[i][0])
@@ -179,5 +107,5 @@ if __name__ == "__main__":
             myLinkedList.deleteAtIndex(vals[i][0])
         elif operations[i] == "get":
             myLinkedList.get(vals[i][0])
-
-
+        myLinkedList.traverse_linked_list()
+        myLinkedList.traverse_linked_list_backwards()
