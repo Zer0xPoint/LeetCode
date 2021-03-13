@@ -8,39 +8,33 @@ from lib.linked_list.linked_list import *
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
-        # two pointer, one for curr, another for next
-        dummy_head = ListNode
-        curr_node = ListNode(0)
-        next_node = ListNode(0)
-        dummy_head.next = curr_node
-        curr_node.next = next_node
-
-        while l1 or l2:
-            curr_val = 0
-            if l1:
-                curr_val += l1.val
-                l1 = l1.next
-            if l2:
-                curr_val += l2.val
-                l2 = l2.next
-
-            if curr_val < 9:
-                curr_node.val += curr_val
-                next_node = ListNode(0)
-            else:
-                curr_node.val += curr_val - 10
-                next_node = ListNode(1)
-
-            curr_node.next = next_node
+        dummy_head = ListNode(0)
+        l1_node = l1
+        l2_node = l2
+        curr_node = dummy_head
+        carry = 0
+        while l1_node or l2_node:
+            l1_val = l1_node.val if l1_node else 0
+            l2_val = l2_node.val if l2_node else 0
+            curr_val = l1_val + l2_val + carry
+            carry = curr_val // 10
+            curr_node.next = ListNode(curr_val % 10)
             curr_node = curr_node.next
+            if l1_node:
+                l1_node = l1_node.next
+            if l2_node:
+                l2_node = l2_node.next
+
+        if carry:
+            curr_node.next = ListNode(carry)
 
         return dummy_head.next
 
 
 if __name__ == '__main__':
     s = Solution()
-    l1 = [9, 9, 9]
-    l2 = [2]
+    # l1 = [9, 9, 9]
+    # l2 = [2]
 
     l1 = [2, 4, 3]
     l2 = [5, 6, 4]
