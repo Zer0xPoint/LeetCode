@@ -1,4 +1,4 @@
-class ListNode(object):
+class Node(object):
     def __init__(self, val):
         self.val = val
         self.next = None
@@ -11,8 +11,8 @@ class MyLinkedList(object):
         """
         Initialize your data structure here.
         """
-        self.dummy_head = ListNode(0)
-        self.dummy_tail = ListNode(0)
+        self.dummy_head = Node(0)
+        self.dummy_tail = Node(0)
         self.dummy_tail.prev = self.dummy_head
         self.dummy_head.next = self.dummy_tail
         self.size = 0
@@ -26,7 +26,7 @@ class MyLinkedList(object):
         return curr_node.val
 
     def addAtHead(self, val):
-        node = ListNode(val)
+        node = Node(val)
         node.next = self.dummy_head.next
         node.prev = self.dummy_head
         self.dummy_head.next.prev = node
@@ -35,7 +35,7 @@ class MyLinkedList(object):
         self.size += 1
 
     def addAtTail(self, val):
-        node = ListNode(val)
+        node = Node(val)
         node.prev = self.dummy_tail.prev
         node.next = self.dummy_tail
         self.dummy_tail.prev.next = node
@@ -54,7 +54,7 @@ class MyLinkedList(object):
             curr_node = self.dummy_head.next
             for __ in range(index - 1):
                 curr_node = curr_node.next
-            node = ListNode(val)
+            node = Node(val)
             node.next = curr_node.next
             node.prev = curr_node
             curr_node.next.prev = node
