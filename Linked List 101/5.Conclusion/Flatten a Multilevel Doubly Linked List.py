@@ -15,15 +15,15 @@ class Solution:
         while curr_node:
             if not curr_node.child:
                 curr_node = curr_node.next
-                continue
-            child_node = curr_node.child
-            while child_node.next:
-                child_node = child_node.next
-            child_node.next = curr_node.next
-            if curr_node.next:
-                curr_node.next.prev = child_node
-            curr_node.next = curr_node.child
-            curr_node.child.prev = curr_node
-            curr_node.child = None
-        return head
+            else:
+                child_node = curr_node.child
+                while child_node.next:
+                    child_node = child_node.next
+                child_node.next = curr_node.next
+                if curr_node.next:
+                    curr_node.next.prev = child_node
+                curr_node.next = curr_node.child
+                curr_node.child.prev = curr_node
+                curr_node.child = None
 
+        return head
