@@ -17,7 +17,6 @@ class Solution:
         curr_node = head
         while curr_node:
             curr_node.next.random = curr_node.random and curr_node.random.next
-            print("1", curr_node.random and curr_node.random.next)
             curr_node = curr_node.next.next
 
         curr_node = head
