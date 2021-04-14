@@ -3,7 +3,7 @@ class Solution(object):
 
         def partition(start, end):
             pivot = nums[end]
-            pivot_index = 0
+            pivot_index = start
             for i in range(start, end):
                 if nums[i] < pivot:
                     nums[pivot_index], nums[i] = nums[i], nums[pivot_index]
@@ -19,6 +19,6 @@ class Solution(object):
 
 
 s = Solution()
-nums = [4, 1, 2, 5, 6, 9]
+nums = [4, 3, 2, 5,1]
 s.quick_sort(nums, start=0, end=len(nums) - 1)
 print(nums)
