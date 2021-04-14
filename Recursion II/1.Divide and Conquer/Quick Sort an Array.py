@@ -19,6 +19,6 @@ class Solution(object):
 
 
 s = Solution()
-nums = [4, 3, 2, 5,1]
+nums = [4, 3, 2, 8, 5, 1, 7, 9]
 s.quick_sort(nums, start=0, end=len(nums) - 1)
 print(nums)
