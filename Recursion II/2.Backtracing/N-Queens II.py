@@ -1,16 +1,25 @@
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        def is_not_under_attack(row, col):
-            pass
 
-        def backtrack(param, count):
-            pass
+        res = []
+
+        def is_not_under_attack(row, col):
+            for exist_row in range(len(res)):
+                exist_col = res[exist_row]
+                if exist_col == col or exist_row == row:
+                    return False
+                elif exist_row + exist_col == row + col:
+                    return False
+                elif exist_row - exist_col == row - col:
+                    return False
+
+            return True
 
         def place_queen(row, col):
-            pass
+            res.append(col)
 
         def remove_queen(row, col):
-            pass
+            res.pop()
 
         def backtrack_nqueen(row=0, count=0):
             for col in range(n):
@@ -23,9 +32,13 @@ class Solution:
                         count += 1
                     else:
                         # we move on to the next row
-                        count = backtrack(row + 1, count)
+                        count = backtrack_nqueen(row + 1, count)
                     # backtrack, i.e. remove the queen and remove the attacking zone.
                     remove_queen(row, col)
             return count
+        return backtrack_nqueen()
 
-        backtrack_nqueen()
+
+s = Solution()
+n = 4
+print(s.totalNQueens(n))
