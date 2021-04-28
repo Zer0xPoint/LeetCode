@@ -6,20 +6,28 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        temp_i = 0
-        pre_temp_num = nums[0]
-        nums_len = len(nums)
-        for i in range(nums_len + 1):
-            temp_num = nums[temp_i]
-            nums[temp_i] = pre_temp_num
-            pre_temp_num = temp_num
-            temp_i = (temp_i + k) % nums_len
+
+        def reverse_list(origin_list, start, end):
+            while start < end:
+                origin_list[start], origin_list[end] = origin_list[end], origin_list[start]
+                start += 1
+                end -= 1
+
+        n = len(nums)
+        k %= n
+
+        if n == 0:
+            return
+        else:
+            nums.reverse()
+            reverse_list(nums, 0, k - 1)
+            reverse_list(nums, k, n - 1)
 
 
 if __name__ == '__main__':
     s = Solution()
-    nums = [1, 2, 3, 4, 5, 6]
-    # nums = [1, 2, 3, 4]
-    k = 2
-    s.rotate(nums, k)
-    print(nums)
+nums = [1, 2, 3, 4, 5, 6]
+# nums = [1, 2, 3, 4]
+k = 2
+s.rotate(nums, k)
+print(nums)

@@ -1,6 +1,7 @@
-k = 2
-temp_i = 1
+nums = [1, 2, 3, 4]
+nums.reverse()
+print(nums)
 
-for i in range(4):
-    print((temp_i + k) % 4)
-    temp_i = (temp_i + k) % 4
+d = dict()
+d[1] = 1
+print(d)
