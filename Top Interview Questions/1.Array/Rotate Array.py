@@ -26,8 +26,7 @@ class Solution:
 
 if __name__ == '__main__':
     s = Solution()
-nums = [1, 2, 3, 4, 5, 6]
-# nums = [1, 2, 3, 4]
-k = 2
-s.rotate(nums, k)
-print(nums)
+    nums = [1, 2, 3, 4, 5, 6]
+    k = 2
+    s.rotate(nums, k)
+    print(nums)

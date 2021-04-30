@@ -4,48 +4,30 @@ from collections import defaultdict
 
 class Solution:
     def isValidSudoku(self, board: List[List[str]]) -> bool:
-        def sub_grid_is_valid(row, column):
-            nums_dict = defaultdict(int)
-            for row_i in range(row, row + 3):
-                for col_i in range(column, column + 3):
-                    num = board[row_i][col_i]
-                    if num != ".":
-                        nums_dict[str(num)] += 1
-                        if nums_dict[str(num)] > 1:
-                            return False
-            return True
+        row_set = [set() for _ in range(9)]
+        col_set = [set() for _ in range(9)]
+        sub_grid_set = [set() for _ in range(9)]
 
-        def row_is_valid(row_i):
-            nums_dict = defaultdict(int)
-            for col_i in range(9):
-                num = board[row_i][col_i]
+        for row in range(9):
+            for col in range(9):
+                num = board[row][col]
+
                 if num != ".":
-                    nums_dict[str(num)] += 1
-                    if nums_dict[str(num)] > 1:
+                    if num in row_set[row]:
                         return False
-            return True
+                    else:
+                        row_set[row].add(num)
 
-        def col_is_valid(col_i):
-            nums_dict = defaultdict(int)
-            for row_i in range(9):
-                num = board[row_i][col_i]
-                if num != ".":
-                    nums_dict[str(num)] += 1
-                    if nums_dict[str(num)] > 1:
+                    if num in col_set[col]:
                         return False
-            return True
+                    else:
+                        col_set[col].add(num)
 
-        for row in range(0, 9, 3):
-            for column in range(0, 9, 3):
-                if not sub_grid_is_valid(row, column):
-                    return False
-        for row in range(0, 9):
-            if not row_is_valid(row):
-                return False
-
-        for col in range(0, 9):
-            if not col_is_valid(col):
-                return False
+                    sub_grid_id = (row // 3) + (col // 3) * 3
+                    if num in sub_grid_set[sub_grid_id]:
+                        return False
+                    else:
+                        sub_grid_set[sub_grid_id].add(num)
         return True
 
 
