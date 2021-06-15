@@ -24,3 +24,5 @@ while n > 0:
 print(-sys.maxsize)
 
 print(Counter("aasdgawef"))
+
+print("123123".join("asdasd"))
