@@ -25,4 +25,7 @@ print(-sys.maxsize)
 
 print(Counter("aasdgawef"))
 
-print("123123".join("asdasd"))
+print("123".join("asdasd"))
+t = ["123", "223", "323"]
+# print(t[:][0])
+print(list(zip(t)))
