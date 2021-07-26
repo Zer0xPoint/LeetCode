@@ -29,3 +29,6 @@ print("123".join("asdasd"))
 t = ["123", "223", "323"]
 # print(t[:][0])
 print(list(zip(t)))
+
+print("smiles"[1:5])
+print("smiles".find("sm"))

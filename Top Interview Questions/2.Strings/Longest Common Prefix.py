@@ -7,18 +7,20 @@ class Solution(object):
         :type strs: List[str]
         :rtype: str
         """
-        if not strs or len(strs) < 1:
-            return [""]
-        for i in range(len(strs[0])):
-            c = strs[0][i]
-            for j in range(len(strs)):
-                if i is len(strs[j]) or strs[j][i] != c:
-                    return strs[0][:i]
+        if len(strs) == 0:
+            return ""
+        prefix = strs[0]
+        for i in range(1, len(strs)):
+            while strs[i].find(prefix) != 0:
+                prefix = prefix[0: len(prefix) - 1]
+                if not prefix:
+                    return ""
+        return prefix
 
 
 if __name__ == '__main__':
     l = ["flower", "flow", "flight"]
     # l = ["dog", "racecar", "car"]
-    l = ["a"]
+    # l = ["", ""]
     s = Solution()
     print(s.longestCommonPrefix(l))
