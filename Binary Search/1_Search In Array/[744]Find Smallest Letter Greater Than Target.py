@@ -46,9 +46,7 @@
 #  
 # 
 #  Related Topics Array Binary Search 👍 4397 👎 2191
-
 from typing import List
-
 
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
@@ -60,14 +58,12 @@ class Solution:
                 left = mid + 1
             else:
                 right = mid - 1
-        # return letters[left] if left < len(letters) else letters[0] by using % operator
         return letters[left % len(letters)]
 
-
 # leetcode submit region end(Prohibit modification and deletion)
-
 # test from here
 solution = Solution()
 print(solution.nextGreatestLetter(["c", "f", "j"], "a"), "c")
 print(solution.nextGreatestLetter(["c", "f", "j"], "c"), "f")
 print(solution.nextGreatestLetter(["x", "x", "y", "y"], "z"), "x")
+print(solution.nextGreatestLetter(["a", "b", "c"], "z"), "a")

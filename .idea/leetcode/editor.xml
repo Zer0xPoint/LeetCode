@@ -3,6 +3,17 @@
   <component name="LeetcodeEditor">
     <option name="projectConfig">
       <map>
+        <entry key="/var/folders/d4/h2y40r4155jgzq70sfljc7140000gn/T/leetcode/editor/en/[4]Median of Two Sorted Arrays.py">
+          <value>
+            <LeetcodeEditor>
+              <option name="contentPath" value="/var/folders/d4/h2y40r4155jgzq70sfljc7140000gn/T/leetcode/editor/en/doc/content/[4]Median of Two Sorted Arrays.md" />
+              <option name="frontendQuestionId" value="leetcode.com4" />
+              <option name="host" value="leetcode.com" />
+              <option name="path" value="/var/folders/d4/h2y40r4155jgzq70sfljc7140000gn/T/leetcode/editor/en/[4]Median of Two Sorted Arrays.py" />
+              <option name="titleSlug" value="median-of-two-sorted-arrays" />
+            </LeetcodeEditor>
+          </value>
+        </entry>
         <entry key="/var/folders/d4/h2y40r4155jgzq70sfljc7140000gn/T/leetcode/editor/en/[744]Find Smallest Letter Greater Than Target.py">
           <value>
             <LeetcodeEditor>
