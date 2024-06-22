@@ -63,6 +63,9 @@ class TimeMap:
         if key not in self.data:
             self.data[key] = []
         self.data[key].append((timestamp, value))
+        # if time stamp is not strictly increasing, use bisect to insert
+        # i = bisect.bisect(self.data[key], (timestamp,))
+        # self.data[key].insert(i, (timestamp, value))
 
     def get(self, key: str, timestamp: int) -> str:
         if key not in self.data:
@@ -77,6 +80,7 @@ class TimeMap:
                     left = mid + 1
                 else:
                     right = mid - 1
+            # return the value associated with the largest timestamp_prev
             return self.data[key][right][1] if right >= 0 else ""
 
 
