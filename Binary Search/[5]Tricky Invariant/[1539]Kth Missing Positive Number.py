@@ -45,6 +45,29 @@ from typing import List
 # leetcode submit region begin(Prohibit modification and deletion)
 class Solution:
     def findKthPositive(self, arr: List[int], k: int) -> int:
+        # # build a list that length equals to the length of arr + k
+        # full_num = [i for i in range(1, len(arr) + k + 1)]
+        # for i in arr:
+        #     if i in full_num:
+        #         full_num.remove(i)
+        # return full_num[k - 1]
+
+        # binary search
+        left, right = 0, len(arr) - 1
+        while left < right:
+            mid = left + (right - left) // 2
+            # the number of missing numbers before arr[mid] is less than k
+            if (missing := arr[mid] - mid - 1) < k:
+                left = mid + 1
+            else:
+                right = mid
+        return right + k
+
 
 # leetcode submit region end(Prohibit modification and deletion)
 # test from here
+print(Solution().findKthPositive([2, 3, 4, 7, 11], 5))
+print(Solution().findKthPositive([1, 2, 3, 4], 2))
+print(Solution().findKthPositive([1], 2))
+# long test
+print(Solution().findKthPositive([i for i in range(1, 1001)], 1000))
